@@ -6,4 +6,9 @@
   Другой вариант - использовать метод split строк, и метод массива join.
 */
 
-function capitalizeWords() {}
+function capitalizeWords(str) {
+	let newSting = str.split(" ")
+	return newSting.map(n => n[0].toUpperCase() + n.slice(1)).join(" ")
+}
+
+capitalizeWords("hello world from javascript")
