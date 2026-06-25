@@ -15,18 +15,18 @@
 */
 
 const PETS = [
-  { id: 'cat', title: '🐱' },
-  { id: 'dog', title: '🐶' },
-  { id: 'parrot', title: '🦜' },
-  { id: 'fish', title: '🐠' },
-  { id: 'spider', title: '🕷' },
-  { id: 'snake', title: '🐍' },
-  { id: 'hamster', title: '🐹' },
-  { id: 'turtle', title: '🐢' },
-  { id: 'chinchilla', title: '🦇' },
-  { id: 'hedgehog', title: '🦔' },
-  { id: 'rat', title: '🐀' },
-  { id: 'frog', title: '🐸' },
+	{id: 'cat', title: '🐱'},
+	{id: 'dog', title: '🐶'},
+	{id: 'parrot', title: '🦜'},
+	{id: 'fish', title: '🐠'},
+	{id: 'spider', title: '🕷'},
+	{id: 'snake', title: '🐍'},
+	{id: 'hamster', title: '🐹'},
+	{id: 'turtle', title: '🐢'},
+	{id: 'chinchilla', title: '🦇'},
+	{id: 'hedgehog', title: '🦔'},
+	{id: 'rat', title: '🐀'},
+	{id: 'frog', title: '🐸'},
 ]
 
 const cart = []
@@ -38,33 +38,42 @@ const clearCartButton = document.getElementById('clear-cart-button')
 
 // Рендерим кнопки для питомцев
 for (let i = 0; i < PETS.length; i++) {
-  const pet = PETS[i]
-
-  const petButtonElement = document.createElement('button')
-  petButtonElement.classList.add('pet')
-  petButtonElement.id = pet.id
-  petButtonElement.textContent = pet.title
-
-  petShop.append(petButtonElement)
+	const pet = PETS[i]
+	
+	const petButtonElement = document.createElement('button')
+	petButtonElement.classList.add('pet')
+	petButtonElement.id = pet.id
+	petButtonElement.textContent = pet.title
+	
+	petShop.append(petButtonElement)
 }
 
 // Обновляем отображение корзины
 function updateCartDisplay() {
-  cartList.innerHTML = ''
-
-  for (let i = 0; i < cart.length; i++) {
-    const petId = cart[i]
-    const pet = PETS.find((item) => item.id === petId)
-    const petSpanElement = document.createElement('li')
-    petSpanElement.classList.add('pet')
-    petSpanElement.textContent = pet.title
-    cartList.append(petSpanElement)
-  }
+	cartList.innerHTML = ''
+	
+	for (let i = 0; i < cart.length; i++) {
+		const petId = cart[i]
+		const pet = PETS.find((item) => item.id === petId)
+		const petSpanElement = document.createElement('li')
+		petSpanElement.classList.add('pet')
+		petSpanElement.textContent = pet.title
+		cartList.append(petSpanElement)
+	}
 }
 
 clearCartButton.addEventListener('click', function () {
-  cart.length = 0
-  updateCartDisplay()
+	cart.length = 0
+	updateCartDisplay()
 })
 
 // Твой код:
+petShop.addEventListener("click", function (event) {
+		if (event.target.id && cart.length < 3) {
+			cart.push(event.target.id)
+			updateCartDisplay()
+		} else if (event.target.id && cart.length >= 3) {
+			messageBox.textContent = "Вы не можете добавить более 3 питомцев"
+		}
+	}
+)
