@@ -57,7 +57,7 @@ const view = {
 		const list = document.querySelector(".list")
 		list.addEventListener("click", function (event) {
 			if (event.target.classList.contains("delete-button")) {
-				controller.deleteMovie(event.target.parentElement.id)
+				controller.deleteMovie(Number(event.target.parentElement.id))
 			}
 		})
 		
